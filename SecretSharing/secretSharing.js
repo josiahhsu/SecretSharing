@@ -36,7 +36,7 @@ function split_plaintext(text, n)
         // generate n-1 pads
         let pad = make_pad(text.length)
         shares.push(pad)
-        runningXOR = xor_bytes(base, pad)
+        runningXOR = xor_bytes(runningXOR, pad)
     }
     shares.push(runningXOR)
     return shares;
