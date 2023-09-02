@@ -17,9 +17,15 @@ function make_pad(n)
     let pad = []
     for (var i = 0; i < n; i++)
     {
-        pad.push(Math.floor(Math.random() * 255))
+        pad.push(Math.floor(Math.random() * 256))
     }
     return pad
+}
+
+function get_charcode_array(text)
+{
+    let utf8Encode = new TextEncoder();
+    return utf8Encode.encode(text);
 }
 
 // splits a plaintext into n shares
@@ -27,8 +33,7 @@ function split_plaintext(text, n)
 {
     // final share will be a running XOR of random pads and the
     // original text's charcode representation
-    let utf8Encode = new TextEncoder();
-    runningXOR = utf8Encode.encode(text);
+    let runningXOR = get_charcode_array(text);
 
     let shares = [];
     for (var i = 0; i < n-1; i++)
