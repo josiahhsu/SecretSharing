@@ -50,8 +50,19 @@ function split_plaintext(text, n)
 // recombines shares
 function combine_shares(shares)
 {
+    // confirm that all shares are of the same length
+    let length = shares[0].length;
+    for (var i = 1; i < shares.length; i++)
+    {
+        if (shares[i].length != length)
+        {
+            alert("ERROR: Shares must have the same length.")
+            return ""
+        }
+    }
+
     // simply XOR all shares together to get original charcode representation
-    let decoded = new Array(shares[0].length).fill(0);
+    let decoded = new Array(length).fill(0);
     for (var i = 0; i < shares.length; i++)
     {
         decoded = xor_bytes(decoded, shares[i])
