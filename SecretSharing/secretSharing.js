@@ -8,18 +8,18 @@ function xor_bytes(b1, b2)
     {
         newBytes.push(b1[i] ^ b2[i]);
     }
-    return newBytes
+    return newBytes;
 }
 
 // makes a pad of n random bytes
 function make_pad(n)
 {
-    let pad = []
+    let pad = [];
     for (var i = 0; i < n; i++)
     {
-        pad.push(Math.floor(Math.random() * 256))
+        pad.push(Math.floor(Math.random() * 256));
     }
-    return pad
+    return pad;
 }
 
 function get_charcode_array(text)
@@ -39,11 +39,11 @@ function split_plaintext(text, n)
     for (var i = 0; i < n-1; i++)
     {
         // generate n-1 pads
-        let pad = make_pad(text.length)
-        shares.push(pad)
-        runningXOR = xor_bytes(runningXOR, pad)
+        let pad = make_pad(text.length);
+        shares.push(pad);
+        runningXOR = xor_bytes(runningXOR, pad);
     }
-    shares.push(runningXOR)
+    shares.push(runningXOR);
     return shares;
 }
 
@@ -56,8 +56,8 @@ function combine_shares(shares)
     {
         if (shares[i].length != length)
         {
-            alert("ERROR: Shares must have the same length.")
-            return ""
+            alert("ERROR: Shares must have the same length.");
+            return "";
         }
     }
 
@@ -65,7 +65,7 @@ function combine_shares(shares)
     let decoded = new Array(length).fill(0);
     for (var i = 0; i < shares.length; i++)
     {
-        decoded = xor_bytes(decoded, shares[i])
+        decoded = xor_bytes(decoded, shares[i]);
     }
-    return String.fromCharCode(...decoded)
+    return String.fromCharCode(...decoded);
 }
