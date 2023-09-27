@@ -39,7 +39,7 @@ function split_plaintext(text, n)
     for (var i = 0; i < n-1; i++)
     {
         // generate n-1 pads
-        let pad = make_pad(text.length);
+        let pad = make_pad(runningXOR.length);
         shares.push(pad);
         runningXOR = xor_bytes(runningXOR, pad);
     }
@@ -67,5 +67,7 @@ function combine_shares(shares)
     {
         decoded = xor_bytes(decoded, shares[i]);
     }
-    return String.fromCharCode(...decoded);
+
+    let utf8Decode = new TextDecoder();
+    return utf8Decode.decode(decoded);
 }
