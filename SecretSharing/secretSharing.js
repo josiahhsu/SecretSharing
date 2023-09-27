@@ -62,12 +62,12 @@ function combine_shares(shares)
     }
 
     // simply XOR all shares together to get original charcode representation
-    let decoded = new Array(length).fill(0);
+    let recombined = new Array(length).fill(0);
     for (var i = 0; i < shares.length; i++)
     {
-        decoded = xor_bytes(decoded, shares[i]);
+        recombined = xor_bytes(recombined, shares[i]);
     }
 
     let utf8Decode = new TextDecoder();
-    return utf8Decode.decode(decoded);
+    return utf8Decode.decode(recombined);
 }
