@@ -28,12 +28,14 @@ function make_pad(n)
     return pad;
 }
 
+// encodes a string of text using utf8 encoding
 function get_charcode_array(text)
 {
     let utf8Encode = new TextEncoder();
     return utf8Encode.encode(text);
 }
 
+// converts a comma-delimited string of numbers to an array
 function share_text_to_array(s)
 {
     return s.split(",").map(Number);
