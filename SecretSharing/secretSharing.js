@@ -69,5 +69,5 @@ function combine_shares(shares)
     }
 
     let utf8Decode = new TextDecoder();
-    return utf8Decode.decode(recombined);
+    return utf8Decode.decode(new Uint8Array(recombined));
 }
