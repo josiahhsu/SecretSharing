@@ -1,5 +1,11 @@
 // Josiah Hsu
 
+// wrapper for error alerting
+function display_error(text)
+{
+    alert("ERROR: " + text)
+}
+
 // returns the XOR of two arrays of bytes
 function xor_bytes(b1, b2)
 {
@@ -56,7 +62,7 @@ function combine_shares(shares)
     {
         if (shares[i].length != length)
         {
-            alert("ERROR: Shares must have the same length.");
+            display_error("Shares must have the same length.");
             return "";
         }
     }
