@@ -34,6 +34,11 @@ function get_charcode_array(text)
     return utf8Encode.encode(text);
 }
 
+function share_text_to_array(s)
+{
+    return s.split(",").map(Number);
+}
+
 // splits a plaintext into n shares
 function split_plaintext(text, n)
 {
