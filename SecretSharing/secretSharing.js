@@ -35,17 +35,20 @@ function get_charcode_array(text)
     return utf8Encode.encode(text);
 }
 
-// converts a space-delimited string of hex numbers to an array
-function hexstring_to_array(s)
+// converts a delimited string of hex numbers to an array
+function hexstring_to_array(s, delim)
 {
+    // if delimiter is blank, divide into two-character chunks for hex representation
+    let arr = (delim)? s.split(delim) : s.match(/.{1,2}/g);
+
     // use a pattern to check if the given array item is a byte in hex
     // valid bytes return their numeric representation, invalid bytes return NaN
     let pattern = /^[0-9a-fA-F]{2}$/;
-    return s.split(" ").map(function(x) { return pattern.test(x) ? parseInt(x, 16) : NaN});
+    return arr.map(function(x) { return pattern.test(x) ? parseInt(x, 16) : NaN});
 }
 
-// converts an array to a space-delimited string of hex numbers
-function array_to_hexstring(a)
+// converts an array to a delimited string of hex numbers
+function array_to_hexstring(a, delim)
 {
     // creates auxillary array of hex strings from the array
     let b = [];
@@ -54,7 +57,7 @@ function array_to_hexstring(a)
         // prepends a 0 for single hex-digit values
         b.push((a[i] < 16? "0":"").concat(a[i].toString(16)));
     }
-    return b.join(" ");
+    return b.join(delim);
 }
 
 // splits a plaintext into n shares
