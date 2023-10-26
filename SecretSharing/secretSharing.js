@@ -48,16 +48,16 @@ function hexstring_to_array(s, delim)
 }
 
 // converts an array to a delimited string of hex numbers
-function array_to_hexstring(a, delim)
+function array_to_hexstring(arr, delim)
 {
     // creates auxillary array of hex strings from the array
-    let b = [];
-    for (var i = 0; i < a.length; i++)
+    let aux = [];
+    for (const a of arr)
     {
         // prepends a 0 for single hex-digit values
-        b.push((a[i] < 16? "0":"").concat(a[i].toString(16)));
+        aux.push((a < 16? "0":"").concat(a.toString(16)));
     }
-    return b.join(delim);
+    return aux.join(delim);
 }
 
 // splits a plaintext into n shares
@@ -84,9 +84,10 @@ function combine_shares(shares)
 {
     // confirm that all shares are of the same length
     let length = shares[0].length;
-    for (var i = 1; i < shares.length; i++)
+
+    for (const s of shares)
     {
-        if (shares[i].length != length)
+        if (s.length != length)
         {
             display_error("Shares must have the same length.");
             return "";
@@ -95,9 +96,9 @@ function combine_shares(shares)
 
     // simply XOR all shares together to get original charcode representation
     let recombined = new Array(length).fill(0);
-    for (var i = 0; i < shares.length; i++)
+    for (const s of shares)
     {
-        recombined = xor_bytes(recombined, shares[i]);
+        recombined = xor_bytes(recombined, s);
     }
 
     let utf8Decode = new TextDecoder();
