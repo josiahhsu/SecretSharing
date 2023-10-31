@@ -44,7 +44,7 @@ function hexstring_to_array(s, delim)
     // use a pattern to check if the given array item is a byte in hex
     // valid bytes return their numeric representation, invalid bytes return NaN
     let pattern = /^[0-9a-fA-F]{2}$/;
-    return arr.map(function(x) { return pattern.test(x) ? parseInt(x, 16) : NaN});
+    return arr.map((x)=>{ return pattern.test(x) ? parseInt(x, 16) : NaN});
 }
 
 // converts an array to a delimited string of hex numbers
